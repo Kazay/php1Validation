@@ -1,1 +1,0 @@
-a:3:{i:0;a:2:{s:5:"email";s:12:"cleo@5454.fr";s:8:"password";s:40:"a3915ba4d8c2f15595c32a28a5e8c1d5a2bc5b0b";}i:1;a:2:{s:5:"email";s:13:"cleo@1234.com";s:8:"password";s:40:"89c70829a3609c9fe616c3ba3129495b7f752352";}i:2;a:2:{s:5:"email";s:20:"czajakevin@gmail.com";s:8:"password";s:40:"2437e141f8ed03a110e3292ce54c741eff6164d5";}}
