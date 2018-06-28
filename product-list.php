@@ -20,37 +20,42 @@ require_once('template/nav.php');
                     $productList = unserialize($productJSON);
                 }
 
-            if(count($productList) >0) {
-            foreach($productList as $product)
+            if(count($productList) >0)
             {
-                 echo '<div class="col m12 l6">
-                         <form action="./cart.php" method="POST">
-                            <div class="card light-blue darken-4">
-                                <div class="card-content white-text">
-                                    <span class="card-title">' . $product['name'] . '</span>
-                                    <p>Prix: ' . $product['price'] . '€</p>
-                                    <br>
-                                    <p>Description: ' . $product['description'] . '</p>
-                                    <input type="hidden" name="productName" value=' . $product['name'] . '>
-                                    <input type="hidden" name="productPrice" value=' . $product['price'] . '>
-                                    <input type="hidden" name="productDescription" value=' . $product['description'] . '>
-                                    </div>
-                                    <div class="card-action">';
-                                    if(isset($_SESSION['login']))
-                                    {
-                                        echo '<button class="btn waves-effect waves-light" type="submit" name="action">Add to cart
-                                                <i class="material-icons right">send</i>
-                                            </button>';
-                                    }
-                                    else
-                                    {
-                                        echo '<button class="btn waves-effect waves-light disabled" type="submit" name="action">Log in to add to cart
-                                                <i class="material-icons right">send</i>
-                                            </button>';
-                                    }
-                                    
-                                    echo '</div></div></form></div>';
-                    }
+                foreach($productList as $product)
+                {
+                    echo '<div class="col m12 l6">
+                            <form action="./cart.php" method="POST">
+                                <div class="card light-blue darken-4">
+                                    <div class="card-content white-text">
+                                        <span class="card-title">' . $product['name'] . '</span>
+                                        <p>Prix: ' . $product['price'] . '€</p>
+                                        <br>
+                                        <p>Description: ' . $product['description'] . '</p>
+                                        <input type="hidden" name="productName" value=' . $product['name'] . '>
+                                        <input type="hidden" name="productPrice" value=' . $product['price'] . '>
+                                        <input type="hidden" name="productDescription" value=' . $product['description'] . '>
+                                        </div>
+                                        <div class="card-action">';
+                                        if(isset($_SESSION['login']))
+                                        {
+                                            echo '<button class="btn waves-effect waves-light" type="submit" name="action">Add to cart
+                                                    <i class="material-icons right">send</i>
+                                                </button>';
+                                        }
+                                        else
+                                        {
+                                            echo '<button class="btn waves-effect waves-light disabled" type="submit" name="action">Log in to add to cart
+                                                    <i class="material-icons right">send</i>
+                                                </button>';
+                                        }
+                                        
+                                        echo '</div></div></form></div>';
+                        }
+                }
+                else
+                {
+                    echo "<p>This website is lacking interesting products. Feel free to add some.</p>";
                 }
                 ?>
          </div>
