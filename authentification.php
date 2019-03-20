@@ -14,27 +14,30 @@ if(count($_POST) > 0)
 {
     $_SESSION['error'] = "";
 
+    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
     //Creation de compte
     if($_POST['signin'] == 1)
     {
         $regexPW = "/^.*(?=.{4,10})(?=.*\d)(?=.*[a-zA-Z]).*$/";
         $loginList = [];
 
+        $passwordCheck = filter_var($_POST['password2'], FILTER_SANITIZE_STRING);
+
         //On verifie si le mdp est valide, sinon on redirige vers la page de login
-        if($_POST['password'] != $_POST['password2'])
+        if($password != $passwordCheck)
             $_SESSION['error'] .= 'Passwords do not match.';
-        if(!preg_match($regexPW, $_POST['password']))
+        if(!preg_match($regexPW, $password))
             $_SESSION['error'] .= 'Passwords must be between 4 and 10 characters with at least one digit.';
         if($_SESSION['error'] != "")
         {
             header('Location: ./login.php');
             exit;
         }
-
-
         
-        $newClient =    ['email' => $_POST['email'],
-                        'password' => sha1($_POST['password'])];
+        $newClient =    ['email' => $email,
+                        'password' => sha1($password)];
 
         //On sauvegarde le nouveau client dans le fichier clients
         $loginFile = fopen("login.txt", "c");
@@ -61,10 +64,10 @@ if(count($_POST) > 0)
             //On verifie si le client match avec un client deja enregistre
             foreach($loginList as $login)
             {
-                if($_POST['email'] == $login['email'] && sha1($_POST['password']) == $login['password'])
+                if($email == $login['email'] && sha1($password) == $login['password'])
                 {
-                    $_SESSION['login'] = $_POST['email'];
-                    $_SESSION['success'] = "You are now connected. Welcome back " . $_POST['email'] . " !";
+                    $_SESSION['login'] = $email;
+                    $_SESSION['success'] = "You are now connected. Welcome back " . $email . " !";
                     header('Location: ./index.php');
                     exit;
                 }

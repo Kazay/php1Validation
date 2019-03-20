@@ -12,9 +12,13 @@ if($productJSON != "")
 
 if(count($_POST) > 0)
 {
-    $newProduct =   ['name' => $_POST['productName'],
-                    'description' => $_POST['description'],
-                    'price' => $_POST['price']];
+    $productName = filter_var($_POST['productName'], FILTER_SANITIZE_STRING);
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+    $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_INT);
+
+    $newProduct =   ['name' => $productName,
+                    'description' => $description,
+                    'price' => $price];
 
     //On sauvegarde le nouveau produit dans le fichier produits
     $productFile = fopen("products.txt", "c");
